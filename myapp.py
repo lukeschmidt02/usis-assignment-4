@@ -54,7 +54,7 @@ def post_env():
     data = request.get_json()
     
     temp = data["temp"]
-    humidity = data["humid"]
+    humidity = data["humidity"]
     
     timestamp = time()
     retstr = {'temp':temp, 'humidity':humidity, 'timestamp':timestamp, "_id": timestamp}
