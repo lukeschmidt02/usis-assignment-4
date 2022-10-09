@@ -13,18 +13,6 @@ myPheader = {'Accept' : 'application/json', 'Authorization' : 'Bearer {}'.format
 client = MongoClient("mongodb+srv://Fieryluketaco:Aquarius@cluster0.thwhulr.mongodb.net/?retryWrites=true&w=majority", tlsCAFile=certifi.where())
 db = client["mydb"]
 
-# temp = random.randint(60, 100)
-# humidity = random.randint(60, 100)
-# timestamp = time()
-# retstr = {'temp':temp, 'humidity':humidity, 'timestamp':timestamp}
-# db.env.insert_one(retstr)
-
-# presence = random.choice(['yes','no'])
-# pose = random.choice(['standing','sitting','reclining','laying down','moving','stretching'])
-# timestamp = time()
-# retstr = {'presence':presence, 'pose':pose, 'timestamp':timestamp}
-# db.pose.insert_one(retstr)
-
 @app.route("/sensors/env", methods=["GET"])
 def get_env():
     rows = db.env.find({})
@@ -53,11 +41,11 @@ def get_pose():
 def post_env():
     data = request.get_json()
     
-    temp = data["temp"]
+    temperature = data["temperature"]
     humidity = data["humidity"]
     
     timestamp = time()
-    retstr = {'temp':temp, 'humidity':humidity, 'timestamp':timestamp, "_id": timestamp}
+    retstr = {'temperature':temperature, 'humidity':humidity, 'timestamp':timestamp, "_id": timestamp}
     db.env.insert_one(retstr)
     return (retstr)
 
